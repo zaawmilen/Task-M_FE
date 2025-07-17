@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL:import.meta.env.VITE_API_BASE || 'http://localhost:5000/api',
 });
 
 // Don't attach interceptors in test environment
