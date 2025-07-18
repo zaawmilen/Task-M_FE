@@ -1,20 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {User} from '../types/task';
 
-interface User {
-  _id?: string;
-  email?: string;
-  username?: string;
-  name?: string;
-  role?: string;
-}
-
-interface LoginProps {
+export interface LoginProps {
     onLogin: (token: string, userData: User) => void;
-}
+    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  }
 
-const Login = ({ onLogin }: LoginProps) => {
+const Login = ({ onLogin, setUser }: LoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

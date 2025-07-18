@@ -258,7 +258,7 @@ function App() {
                     toggleTaskCompletion={toggleTaskCompletion}
                     deleteTask={deleteTask}
                     currentPage={currentPage}
-                    totalPages={totalPages}
+                    // totalPages={totalPages}
                     onPageChange={handlePageChange}
                     onSearch={handleSearch}
                     loading={isLoading}
