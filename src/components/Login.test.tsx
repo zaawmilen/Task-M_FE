@@ -20,14 +20,14 @@ describe('Login Component', () => {
   });
 
   it('renders login form', () => {
-    render(<Login onLogin={onLogin} setUser={setUser} />);
+    render(<Login onLogin={onLogin} />);
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
   });
 
   it('updates input fields', () => {
-    render(<Login onLogin={onLogin} setUser={setUser} />);
+    render(<Login onLogin={onLogin} />);
     fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
     fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'password123' } });
     expect(screen.getByLabelText(/email/i)).toHaveValue('test@example.com');
@@ -39,7 +39,7 @@ describe('Login Component', () => {
       data: { token: 'fake-token', user: { email: 'test@example.com' } },
     });
 
-    render(<Login onLogin={onLogin} setUser={setUser} />);
+    render(<Login onLogin={onLogin} />);
     fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
     fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'password123' } });
     fireEvent.click(screen.getByRole('button', { name: /login/i }));
@@ -52,7 +52,7 @@ describe('Login Component', () => {
 // Example for Login.test.tsx
 it('logs in with valid credentials and redirects', async () => {
   mockedAxios.post.mockResolvedValueOnce({ data: { token: 'abc', user: { email: 'test@test.com' } } });
-  render(<Login onLogin={onLogin} setUser={setUser} />);
+  render(<Login onLogin={onLogin} />);
   fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@test.com' } });
   fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'pass' } });
   fireEvent.click(screen.getByRole('button', { name: /login/i }));
@@ -83,7 +83,7 @@ it('shows error on invalid credentials', async () => {
       response: { data: { message: 'Invalid credentials' } },
     });
 
-    render(<Login onLogin={onLogin} setUser={setUser} />);
+    render(<Login onLogin={onLogin} />);
     fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'wrong@example.com' } });
     fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'wrongpass' } });
     fireEvent.click(screen.getByRole('button', { name: /login/i }));
