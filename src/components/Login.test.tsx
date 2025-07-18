@@ -65,7 +65,7 @@ it('shows error on invalid credentials', async () => {
     response: { data: { message: 'Invalid credentials' } } 
   });
   
-  render(<Login onLogin={onLogin} setUser={setUser} />);
+  render(<Login onLogin={onLogin}  />);
   
   fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'wrong@test.com' } });
   fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'wrong' } });
