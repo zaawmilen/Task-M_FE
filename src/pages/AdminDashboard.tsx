@@ -107,7 +107,7 @@ const AdminDashboard: React.FC = () => {
         ) : error ? (
           <div className="text-red-500 text-center py-4">{error}</div>
         ) : (
-          <UserTable users={users} refresh={fetchUsers} currentUserId={user._id || user.userId} />
+          <UserTable users={users} refresh={fetchUsers} currentUserId={user._id} />
         )
       ) : (
         <div>

@@ -289,7 +289,7 @@ function App() {
             {/* Login & Register */}
             <Route
               path="/login"
-              element={user ? <Navigate to="/" replace /> : <Login setUser={setUser} onLogin={handleLogin} />}
+              element={user ? <Navigate to="/" replace /> : <Login onLogin={handleLogin} />}
             />
             <Route
               path="/register"

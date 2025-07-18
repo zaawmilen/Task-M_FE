@@ -5,10 +5,10 @@ import {User} from '../types/task';
 
 export interface LoginProps {
     onLogin: (token: string, userData: User) => void;
-    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    // setUser: React.Dispatch<React.SetStateAction<User | null>>;
   }
 
-const Login = ({ onLogin, setUser }: LoginProps) => {
+const Login = ({ onLogin }: LoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
