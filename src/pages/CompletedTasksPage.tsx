@@ -8,8 +8,7 @@ interface CompletedTasksPageProps {
   toggleTaskCompletion: (id: string) => Promise<void>;
   deleteTask: (id: string) => Promise<void>;
   currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
+   onPageChange: (page: number) => void;
   onSearch: (term: string) => void;
   loading: boolean;
 }
@@ -21,8 +20,7 @@ const CompletedTasksPage: React.FC<CompletedTasksPageProps> = ({
   toggleTaskCompletion,
   deleteTask,
   currentPage,
-  totalPages,
-  onPageChange,
+   onPageChange,
   onSearch,
   loading,
 }) => {

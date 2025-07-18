@@ -21,7 +21,6 @@ const ActiveTasksPage: React.FC<ActiveTasksPageProps> = ({
   toggleTaskCompletion,
   deleteTask,
   currentPage,
-  totalPages,
   onPageChange,
   onSearch,
   loading,

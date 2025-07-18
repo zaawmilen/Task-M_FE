@@ -11,11 +11,10 @@ interface User {
 }
 
 interface LoginProps {
-  setUser: (user: User) => void;
-  onLogin: (token: string, userData: User) => void;
+    onLogin: (token: string, userData: User) => void;
 }
 
-const Login = ({ setUser, onLogin }: LoginProps) => {
+const Login = ({ onLogin }: LoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

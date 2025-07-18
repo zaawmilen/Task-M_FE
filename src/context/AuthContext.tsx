@@ -4,9 +4,11 @@ import axios from 'axios';
 
 // Define the shape of a user
 interface User {
-  userId: string;
+  _id: string;
+  name: string;
   email: string;
-  role: 'admin' | 'user';
+  username: string;
+   role: 'admin' | 'user';
 }
 
 // Define what the AuthContext will provide

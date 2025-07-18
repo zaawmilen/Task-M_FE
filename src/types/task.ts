@@ -5,7 +5,7 @@ export interface User {
   email: string;
   username: string;
   role: string;
-  
+     
 }
 
 export interface Task {
