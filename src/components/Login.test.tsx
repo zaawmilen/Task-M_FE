@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('Login Component', () => {
   const onLogin = jest.fn();
-  const setUser = jest.fn();
+ 
 
   beforeEach(() => {
     jest.clearAllMocks();
