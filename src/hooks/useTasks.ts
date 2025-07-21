@@ -1,6 +1,6 @@
 // useTasks.ts
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { Task } from '../types/task';
 import { useAuth } from '../context/AuthContext';
 
@@ -16,7 +16,7 @@ export const useTasks = () => {
   const fetchTasks = async (page = 1, limit = 10, search = '') => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/tasks', {
+      const res = await api.get('https://task-m-be.onrender.com/api/tasks', {
         params: { page, limit, search },
       });
       setTasks(res.data.tasks);
@@ -31,7 +31,7 @@ export const useTasks = () => {
 
   const addTask = async (task: { title: string; dueDate: string }) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/tasks', task);
+      const res = await api.post('https://task-m-be.onrender.com/api/tasks', task);
       setTasks((prev) => [...prev, res.data]);
     } catch (err: any) {
       console.error('Add task error:', err.message);
@@ -40,7 +40,7 @@ export const useTasks = () => {
 
   const deleteTask = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+      await api.delete(`https://task-m-be.onrender.com/api/tasks/${id}`);
       setTasks((prev) => prev.filter((task) => task._id !== id));
     } catch (err: any) {
       console.error('Delete task error:', err.message);
@@ -51,7 +51,7 @@ export const useTasks = () => {
     const task = tasks.find((t) => t._id === id);
     if (!task) return;
     try {
-      const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, {
+      const res = await api.put(`https://task-m-be.onrender.com/api/tasks/${id}`, {
         completed: !task.completed,
       });
       setTasks((prev) =>
