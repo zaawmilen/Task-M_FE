@@ -22,7 +22,7 @@ const Login = ({ onLogin }: LoginProps) => {
     setError('');
 
     try {
-      const response = await axios.post(`https://task-m-be.onrender.com/api/auth/login`, {
+      const response = await api.post(`/auth/login`, {
         email,
         password
       });
