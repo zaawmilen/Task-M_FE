@@ -12,7 +12,7 @@ const Signup = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await api.post(`/auth/register`, {
+      await api.post(`/register`, {
         name,
         email,
         password,

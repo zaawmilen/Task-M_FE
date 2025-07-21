@@ -8,7 +8,7 @@ console.log('API Configuration:', {
 
 
 const api = axios.create({
-   baseURL: 'https://task-m-be.onrender.com/api',
+   baseURL: 'https://task-m-be.onrender.com/',
 });
 
 // Don't attach interceptors in test environment
