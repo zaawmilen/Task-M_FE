@@ -1,7 +1,14 @@
 import axios from 'axios';
 
+console.log('API Configuration:', {
+  envVar: import.meta.env.VITE_API_BASE,
+  mode: import.meta.env.MODE,
+  allEnvVars: import.meta.env
+});
+
+
 const api = axios.create({
-  baseURL:import.meta.env.VITE_API_BASE || 'http://localhost:5000/api',
+   baseURL: 'https://task-m-be.onrender.com/api',
 });
 
 // Don't attach interceptors in test environment
