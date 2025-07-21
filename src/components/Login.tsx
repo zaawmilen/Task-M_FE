@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api  from '../utils/api';
 import {User} from '../types/task';
 
 export interface LoginProps {
