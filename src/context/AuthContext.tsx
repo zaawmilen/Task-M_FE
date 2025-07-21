@@ -1,7 +1,6 @@
 // src/context/AuthContext.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
-
+import api from  '../utils/api';
 // Define the shape of a user
 interface User {
   _id: string;
@@ -40,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           
           // Fetch the user data
-          const res = await axios.get('http://localhost:5000/api/auth/me');
+          const res = await api.get(`https://task-m-be.onrender.com/api/auth/me`);
           
           // Assuming res.data is the user object itself
           setUser(res.data.user); // res.data is now the user object directly

@@ -12,6 +12,7 @@ import Register from './components/Register';
 import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Task } from './types/task';
+import api from './utils/api';
 
 interface User {
   _id?: string;
@@ -63,7 +64,7 @@ function App() {
         }
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        const res = await axios.get('http://localhost:5000/api/auth/me');
+        const res = await api.get('https://task-m-be.onrender.com/api/auth/me');
         setUser(res.data.user);
         await fetchTasks(); // Fetch tasks after setting user
       } catch (error) {
@@ -89,7 +90,7 @@ function App() {
     if (!token) return;
 
     try {
-      const response = await axios.get('http://localhost:5000/api/tasks', {
+      const response = await api.get('https://task-m-be.onrender.com/api/tasks', {
         params: { page, limit, search },
         headers: {
           Authorization: `Bearer ${token}`
@@ -109,7 +110,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (!token || !user) return;
 
-      await axios.post('http://localhost:5000/api/tasks', task, {
+      await api.post('https://task-m-be.onrender.com/api/tasks', task, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -127,7 +128,7 @@ function App() {
       const updatedTask = tasks.find(task => task._id === id);
       if (!updatedTask) return;
 
-      const response = await axios.put(`http://localhost:5000/api/tasks/${id}`, {
+      const response = await api.put(`https://task-m-be.onrender.com/api/tasks/${id}`, {
         completed: !updatedTask.completed,
       });
 
@@ -141,7 +142,7 @@ function App() {
 
   const deleteTask = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+      await api.delete(`https://task-m-be.onrender.com/api/tasks/${id}`);
       setTasks(prevTasks => prevTasks.filter(task => task._id !== id));
     } catch (error) {
       console.error('Error deleting task:', error);
