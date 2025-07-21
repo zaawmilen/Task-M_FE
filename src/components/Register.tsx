@@ -12,7 +12,7 @@ const Signup = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('${import.meta.env.VITE_API_URL}/auth/register', {
+      await axios.post('${import.meta.env.VITE_API_BASE}/auth/register', {
         name,
         email,
         password,
