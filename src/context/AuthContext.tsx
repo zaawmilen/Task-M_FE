@@ -1,6 +1,8 @@
 // src/context/AuthContext.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from  '../utils/api';
+import axios from 'axios';
+
 // Define the shape of a user
 interface User {
   _id: string;
