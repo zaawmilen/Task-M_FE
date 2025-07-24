@@ -31,7 +31,7 @@ const UserTasksModal: React.FC<UserTasksModalProps> = ({
     try {
       setLoading(true);
       setError(null);
-      const res = await api.get<>(`/admin/users/${userId}/tasks`);
+      const res = await api.get<Task[]>(`/admin/users/${userId}/tasks`);
       setTasks(res.data);
     } catch (err: any) {
       setError('Failed to fetch tasks. Please try again.');

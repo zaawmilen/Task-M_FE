@@ -36,8 +36,14 @@ describe('Login Component', () => {
 
   it('handles successful login', async () => {
     mockedAxios.post.mockResolvedValueOnce({
-      data: { token: 'fake-token', user: { email: 'test@example.com' } },
-    });
+  data: { token: 'fake-token', user: { email: 'test@example.com' } },
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: {
+    url: '/auth/login',
+  },
+});
 
     render(<Login onLogin={onLogin} />);
     fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
@@ -51,7 +57,16 @@ describe('Login Component', () => {
   });
 // Example for Login.test.tsx
 it('logs in with valid credentials and redirects', async () => {
-  mockedAxios.post.mockResolvedValueOnce({ data: { token: 'abc', user: { email: 'test@test.com' } } });
+  mockedAxios.post.mockResolvedValueOnce({
+  data: { token: 'abc', user: { email: 'test@test.com' } },
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: {
+    url: '/auth/login',
+  },
+});
+
   render(<Login onLogin={onLogin} />);
   fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@test.com' } });
   fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'pass' } });
