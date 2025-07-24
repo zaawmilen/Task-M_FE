@@ -6,16 +6,16 @@ console.log('API Configuration:', {
   allEnvVars: import.meta.env
 });
 
-
 const api = axios.create({
-   baseURL: 'https://task-m-be.onrender.com/api/',
+  baseURL: import.meta.env.VITE_API_BASE || 'https://task-m-be.onrender.com/api',
+  withCredentials: true,
 });
 
 // Don't attach interceptors in test environment
 if (import.meta.env.MODE !== 'test') {
   // Request logging
   api.interceptors.request.use(
-    config => {
+    (config: any) => {
       console.log(`API Request: ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`);
       return config;
     },
@@ -44,9 +44,11 @@ if (import.meta.env.MODE !== 'test') {
   );
 
   // Token injection
-  api.interceptors.request.use(config => {
+  api.interceptors.request.use((config: any) => {
     const token = localStorage.getItem('token');
-    if (token) config.headers.Authorization = `Bearer ${token}`;
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   });
 }

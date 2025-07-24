@@ -7,7 +7,10 @@ export interface LoginProps {
     onLogin: (token: string, userData: User) => void;
     // setUser: React.Dispatch<React.SetStateAction<User | null>>;
   }
-
+interface LoginResponse {
+  token: string;
+  user: User;
+}
 const Login = ({ onLogin }: LoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +25,7 @@ const Login = ({ onLogin }: LoginProps) => {
     setError('');
 
     try {
-      const response = await api.post(`auth/login`, {
+      const response = await api.post<LoginResponse>(`auth/login`, {
         email,
         password
       });

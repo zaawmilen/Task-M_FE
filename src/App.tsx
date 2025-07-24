@@ -21,6 +21,15 @@ interface User {
   name?: string;
   role?: string;
 }
+interface UserResponse {
+  user: User;
+}
+export interface TaskResponse {
+  tasks: Task[];
+  page: number;
+  totalPages: number;
+}
+
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -64,7 +73,7 @@ function App() {
         }
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        const res = await api.get('https://task-m-be.onrender.com/api/auth/me');
+        const res = await api.get<UserResponse>('/auth/me');
         setUser(res.data.user);
         await fetchTasks(); // Fetch tasks after setting user
       } catch (error) {
@@ -90,7 +99,7 @@ function App() {
     if (!token) return;
 
     try {
-      const response = await api.get('https://task-m-be.onrender.com/api/tasks', {
+      const response = await api.get<TaskResponse>('/tasks', {
         params: { page, limit, search },
         headers: {
           Authorization: `Bearer ${token}`
@@ -110,7 +119,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (!token || !user) return;
 
-      await api.post('https://task-m-be.onrender.com/api/tasks', task, {
+      await api.post('/tasks', task, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -128,7 +137,7 @@ function App() {
       const updatedTask = tasks.find(task => task._id === id);
       if (!updatedTask) return;
 
-      const response = await api.put(`https://task-m-be.onrender.com/api/tasks/${id}`, {
+      const response = await api.put<Task>(`/tasks/${id}`, {
         completed: !updatedTask.completed,
       });
 
@@ -142,7 +151,7 @@ function App() {
 
   const deleteTask = async (id: string) => {
     try {
-      await api.delete(`https://task-m-be.onrender.com/api/tasks/${id}`);
+      await api.delete(`/tasks/${id}`);
       setTasks(prevTasks => prevTasks.filter(task => task._id !== id));
     } catch (error) {
       console.error('Error deleting task:', error);
