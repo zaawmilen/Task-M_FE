@@ -11,7 +11,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import { Task } from './types/task';
+import { Task } from './types/type';
 import api from './utils/api';
 
 interface User {

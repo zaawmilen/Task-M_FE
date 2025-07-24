@@ -1,7 +1,7 @@
 // components/UserTasksModal.tsx
 import React, { useEffect, useState } from 'react';
 import api from '../utils/api';
-import { Task } from '../types/task';
+import { Task } from '../types/type';
 
 interface UserTasksModalProps {
   userId: string;
@@ -31,7 +31,7 @@ const UserTasksModal: React.FC<UserTasksModalProps> = ({
     try {
       setLoading(true);
       setError(null);
-      const res = await api.get(`/admin/users/${userId}/tasks`);
+      const res = await api.get<>(`/admin/users/${userId}/tasks`);
       setTasks(res.data);
     } catch (err: any) {
       setError('Failed to fetch tasks. Please try again.');

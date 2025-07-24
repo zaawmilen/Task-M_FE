@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../utils/api';
 import axios from 'axios';
-import { User, AuthResponse } from '../types/task';
+import { User, AuthResponse } from '../types/type';
 
 // Define what the AuthContext will provide
 interface AuthContextType {

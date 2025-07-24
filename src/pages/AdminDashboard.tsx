@@ -3,11 +3,12 @@ import api from '../utils/api';
 import UserTable from '../components/UserTable';
 import TaskTable from '../components/TaskTable';
 import { useAuth } from '../context/AuthContext';
-import { Task } from '../types/task';
+import { User,UsersResponse, Task, TasksResponse } from '../types/type';
+
 
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [allTasks, setAllTasks] = useState<Task[]>([]);
   const [activeTab, setActiveTab] = useState<'users' | 'tasks'>('users');
   const [isLoading, setIsLoading] = useState(true);
@@ -18,34 +19,51 @@ const AdminDashboard: React.FC = () => {
   const tasksPerPage = 5;
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
-  // Fetch users
-  const fetchUsers = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const res = await api.get('/admin/users');
-      setUsers(res.data.users || res.data);
-    } catch (err) {
-      setError('Failed to fetch users. Please try again.');
-    } finally {
-      setIsLoading(false);
+  // Fixed fetchUsers function
+const fetchUsers = async () => {
+  try {
+    setIsLoading(true);
+    setError(null);
+    const res = await api.get('/admin/users');
+    const responseData = res.data as UsersResponse | User[];
+    
+    // Handle both response formats
+    if (Array.isArray(responseData)) {
+      setUsers(responseData);
+    } else if (responseData && 'users' in responseData) {
+      setUsers(responseData.users);
+    } else {
+      setUsers([]);
     }
-  };
+  } catch (err) {
+    setError('Failed to fetch users. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
-  // Fetch all tasks
-  const fetchAllTasks = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const res = await api.get('/admin/tasks');
-      setAllTasks(res.data.tasks || res.data);
-    } catch (err: any) {
-      setError('Failed to fetch tasks. Please try again.');
-    } finally {
-      setIsLoading(false);
+// Fixed fetchAllTasks function
+const fetchAllTasks = async () => {
+  try {
+    setIsLoading(true);
+    setError(null);
+    const res = await api.get('/admin/tasks');
+    const responseData = res.data as TasksResponse | Task[];
+    
+    // Handle both response formats
+    if (Array.isArray(responseData)) {
+      setAllTasks(responseData);
+    } else if (responseData && 'tasks' in responseData) {
+      setAllTasks(responseData.tasks);
+    } else {
+      setAllTasks([]);
     }
-  };
-
+  } catch (err: any) {
+    setError('Failed to fetch tasks. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
   useEffect(() => {
     fetchUsers();
   }, []);

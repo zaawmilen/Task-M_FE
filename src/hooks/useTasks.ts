@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
-import { Task } from '../types/task';
+import { Task } from '../types/type';
 import { useAuth } from '../context/AuthContext';
 import { TaskListResponse } from '../types/api';
 

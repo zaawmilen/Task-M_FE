@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import TaskList from './TaskList';
-import { Task } from '../types/task';
+import { Task } from '../types/type';
 
 const mockTasks: Task[] = [
   {

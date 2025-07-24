@@ -1,5 +1,5 @@
 
-import { Task } from './task';
+import { Task } from './type';
 
 export interface TaskListResponse {
   tasks: Task[];
